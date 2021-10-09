@@ -16,6 +16,7 @@ public class PasswordEncodingTest {
         PasswordEncoder bcrypt = new BCryptPasswordEncoder(15);
         System.out.println(bcrypt.encode(PASSWORD));
         System.out.println(bcrypt.encode(PASSWORD));
+        System.out.println(bcrypt.encode("guru"));
     }
     @Test
     void testSha256() {
@@ -28,6 +29,7 @@ public class PasswordEncodingTest {
         PasswordEncoder ldapEncoder = new LdapShaPasswordEncoder();
         System.out.println(ldapEncoder.encode(PASSWORD));
         System.out.println(ldapEncoder.encode(PASSWORD));
+        System.out.println(ldapEncoder.encode("tiger"));
     }
     @Test
     void testNoOp() {
