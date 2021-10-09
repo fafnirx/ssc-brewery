@@ -1,5 +1,6 @@
 package guru.sfg.brewery.config;
 
+import guru.sfg.brewery.security.FafnirxDelegatingPasswordEncoder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -7,8 +8,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
@@ -17,8 +16,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     PasswordEncoder passwordEncoder() {
-        //return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        return FafnirxDelegatingPasswordEncoder.createDelegatingPasswordEncoder();
     }
 
     @Override
@@ -51,7 +49,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .roles("USER");
         auth.inMemoryAuthentication()
                 .withUser("scott")
-                .password("{ldap}{SSHA}hwhuodaWeAilPX0BDWyXp1WSbzhkPJiYUNF01w==")
+                .password("{bcrypt15}$2a$15$c0c6QGcVgjN1gBpURV70b.kdYByE0oLmTfCTb5jM/zfjhxeIbCE.6")
                 .roles("CUSTOMER");
     }
 
