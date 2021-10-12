@@ -48,6 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                                     "/webjars/**",
                                     "/login", "/resources/**",
                                     "/beers/find", "/beers*").permitAll()
+                            .antMatchers("/h2-console/**bewlin").permitAll()
                             .antMatchers(HttpMethod.GET, "/api/v1/beer/**").permitAll()
                             .mvcMatchers(HttpMethod.GET, "/api/v1/beerUpc/{upc}").permitAll();
                 })
@@ -55,8 +56,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated().and()
                 .formLogin().and()
                 .httpBasic();
+        //h2 console config
+        http.headers().frameOptions().sameOrigin();
     }
 
+/*
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
@@ -72,6 +76,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .password("{bcrypt15}$2a$15$c0c6QGcVgjN1gBpURV70b.kdYByE0oLmTfCTb5jM/zfjhxeIbCE.6")
                 .roles("CUSTOMER");
     }
+*/
 
 //    @Override
 //    @Bean
