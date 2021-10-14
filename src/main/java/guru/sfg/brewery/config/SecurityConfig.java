@@ -22,12 +22,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests(authorize -> authorize
-                        .antMatchers("/h2-console/**bewlin").permitAll()
+                        .antMatchers("/h2-console/**").permitAll()
                         .antMatchers("/",
                                 "/webjars/**",
                                 "/login", "/resources/**",
                                 "/beers/find", "/beers*").permitAll()
                         .antMatchers(HttpMethod.GET, "/api/v1/beer/**").permitAll()
+                        .antMatchers("/brewery/breweries/**").hasRole("CUSTOMER")
+                        .mvcMatchers(HttpMethod.GET, "/api/v1/breweries/**").hasRole("CUSTOMER")
                         .mvcMatchers(HttpMethod.DELETE, "/api/v1/beer/**").hasRole("ADMIN")
                         .mvcMatchers(HttpMethod.GET, "/api/v1/beerUpc/{upc}").permitAll())
                 .authorizeRequests()
