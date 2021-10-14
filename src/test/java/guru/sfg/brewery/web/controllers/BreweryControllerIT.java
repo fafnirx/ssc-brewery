@@ -28,14 +28,14 @@ public class BreweryControllerIT extends BaseIT{
     void listBreweriesWithAdminRole() throws Exception {
         mockMvc.perform(get(BREWERY_BREWERIES_BASE_URL)
                         .with(httpBasic("spring", "guru")))
-                .andExpect(status().isForbidden());
+                .andExpect(status().is2xxSuccessful());
     }
 
     @Test
     void listBreweriesWithCustomerRole() throws Exception {
         mockMvc.perform(get(BREWERY_BREWERIES_BASE_URL)
                         .with(httpBasic("scott", "tiger")))
-                .andExpect(status().isOk());
+                .andExpect(status().is2xxSuccessful());
     }
 
 }
