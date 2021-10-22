@@ -54,7 +54,6 @@ public class UserDataLoader implements CommandLineRunner {
 
         log.debug("Number of Authorities loaded: {}", authorityRepository.count());
 
-
         Role adminRole = roleRepository.save(Role.builder().roleName("ADMIN").build());
         adminRole.setAuthorities(
                 new HashSet<>(Set.of(
